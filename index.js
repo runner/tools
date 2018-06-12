@@ -7,7 +7,7 @@
 
 var fs    = require('fs'),
     path  = require('path'),
-    async = require('@cjssdk/async');
+    async = require('cjs-async');
 
 
 // public
@@ -18,15 +18,27 @@ module.exports = {
             // create task
             return function ( ready ) {
                 fs.unlink(file, function ( error ) {
-                    if ( !error ) {
-                        log.info('remove ' + log.colors.bold(file));
-                    } else if ( error.code !== 'ENOENT' ) {
+                    if ( error ) {
                         log.fail(error.toString());
+                    } else if ( error.code !== 'ENOENT' ) {
+                        log.info('remove ' + log.colors.bold(file));
                     }
                     ready();
                 });
             };
         }), done);
+    },
+
+    read: function ( file, log, done ) {
+        fs.readFile(file, function ( error, data ) {
+            if ( error ) {
+                log.fail(error.toString());
+                done(error)
+            } else {
+                log.info('read ' + log.colors.bold(file));
+                done(null, data);
+            }
+        });
     },
 
     write: function ( files, log, done ) {
@@ -73,10 +85,10 @@ module.exports = {
             // create task
             return function ( ready ) {
                 fs.mkdir(dir, function ( error ) {
-                    if ( !error ) {
-                        log.info('mkdir ' + log.colors.bold(dir));
-                    } else if ( error.code !== 'EEXIST' ) {
+                    if ( error ) {
                         log.fail(error.toString());
+                    } else if ( error.code !== 'EEXIST' ) {
+                        log.info('mkdir ' + log.colors.bold(dir));
                     }
                     ready();
                 });
