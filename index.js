@@ -31,6 +31,18 @@ module.exports = {
         }), done);
     },
 
+    read: function ( file, log, done ) {
+        fs.readFile(file, function ( error, data ) {
+            if ( error ) {
+                log.fail(error.toString());
+                done(error);
+            } else {
+                log.info('read ' + log.colors.bold(file));
+                done(null, data);
+            }
+        });
+    },
+
     write: function ( files, log, done ) {
         // convert file list to write task list and execute
         async.parallel(files.map(function ( file ) {
