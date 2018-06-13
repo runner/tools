@@ -18,10 +18,12 @@ module.exports = {
             // create task
             return function ( ready ) {
                 fs.unlink(file, function ( error ) {
-                    if ( !error ) {
+                    if ( error ) {
+                        if ( error.code !== 'ENOENT' ) {
+                            log.fail(error.toString());
+                        }
+                    } else {
                         log.info('remove ' + log.colors.bold(file));
-                    } else if ( error.code !== 'ENOENT' ) {
-                        log.fail(error.toString());
                     }
                     ready();
                 });
@@ -73,10 +75,12 @@ module.exports = {
             // create task
             return function ( ready ) {
                 fs.mkdir(dir, function ( error ) {
-                    if ( !error ) {
+                    if ( error ) {
+                        if ( error.code !== 'EEXIST' ) {
+                            log.fail(error.toString());
+                        }
+                    } else {
                         log.info('mkdir ' + log.colors.bold(dir));
-                    } else if ( error.code !== 'EEXIST' ) {
-                        log.fail(error.toString());
                     }
                     ready();
                 });
