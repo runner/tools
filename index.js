@@ -25,6 +25,7 @@ module.exports = {
                     } else {
                         log.info('remove ' + log.colors.bold(file));
                     }
+
                     ready();
                 });
             };
@@ -35,11 +36,11 @@ module.exports = {
         fs.readFile(file, function ( error, data ) {
             if ( error ) {
                 log.fail(error.toString());
-                done(error);
             } else {
                 log.info('read ' + log.colors.bold(file));
-                done(null, data);
             }
+
+            done(error, data);
         });
     },
 
@@ -94,6 +95,7 @@ module.exports = {
                     } else {
                         log.info('mkdir ' + log.colors.bold(dir));
                     }
+
                     ready();
                 });
             };
