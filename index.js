@@ -7,7 +7,7 @@
 
 var fs    = require('fs'),
     path  = require('path'),
-    async = require('cjs-async');
+    async = require('@cjssdk/async');
 
 
 // public
@@ -33,7 +33,7 @@ module.exports = {
         fs.readFile(file, function ( error, data ) {
             if ( error ) {
                 log.fail(error.toString());
-                done(error)
+                done(error);
             } else {
                 log.info('read ' + log.colors.bold(file));
                 done(null, data);
