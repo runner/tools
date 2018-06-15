@@ -18,11 +18,14 @@ module.exports = {
             // create task
             return function ( ready ) {
                 fs.unlink(file, function ( error ) {
-                    if ( !error ) {
+                    if ( error ) {
+                        if ( error.code !== 'ENOENT' ) {
+                            log.fail(error.toString());
+                        }
+                    } else {
                         log.info('remove ' + log.colors.bold(file));
-                    } else if ( error.code !== 'ENOENT' ) {
-                        log.fail(error.toString());
                     }
+
                     ready();
                 });
             };
@@ -33,16 +36,15 @@ module.exports = {
         fs.readFile(file, function ( error, data ) {
             if ( error ) {
                 log.fail(error.toString());
-                done(error);
             } else {
                 log.info(
                     'read %s (size: %s)',
                     log.colors.bold(file),
                     log.colors.green(data.length)
                 );
-
-                done(null, data);
             }
+
+            done(error, data);
         });
     },
 
@@ -90,11 +92,14 @@ module.exports = {
             // create task
             return function ( ready ) {
                 fs.mkdir(dir, function ( error ) {
-                    if ( !error ) {
+                    if ( error ) {
+                        if ( error.code !== 'EEXIST' ) {
+                            log.fail(error.toString());
+                        }
+                    } else {
                         log.info('mkdir ' + log.colors.bold(dir));
-                    } else if ( error.code !== 'EEXIST' ) {
-                        log.fail(error.toString());
                     }
+
                     ready();
                 });
             };
