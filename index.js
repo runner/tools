@@ -35,7 +35,12 @@ module.exports = {
                 log.fail(error.toString());
                 done(error);
             } else {
-                log.info('read ' + log.colors.bold(file));
+                log.info(
+                    'read %s (size: %s)',
+                    log.colors.bold(file),
+                    log.colors.green(data.length)
+                );
+
                 done(null, data);
             }
         });
