@@ -104,5 +104,83 @@ module.exports = {
                 });
             };
         }), done);
+    },
+
+
+    copy: function ( config, log, done ) {
+        var level       = 0,
+            directories = 0,
+            files       = 0;
+
+        function finish ( error, done ) {
+            if ( error ) {
+                log.fail(error.toString());
+                done(error);
+            } else {
+                log.info(
+                    'copy %s to %s (directories: %s, files: %s)',
+                    log.colors.bold(config.source),
+                    log.colors.bold(config.target),
+                    log.colors.bold(directories),
+                    log.colors.bold(files)
+                );
+
+                done();
+            }
+        }
+
+        function copy ( source, target, done ) {
+            level++;
+
+            fs.mkdir(target, function ( error ) {
+                if ( error && error.code !== 'EEXIST' ) {
+                    finish(error);
+                } else {
+                    if ( !error ) {
+                        directories++;
+                    }
+
+                    fs.readdir(source, function ( error, list ) {
+                        // check exist source
+                        if ( error ) {
+                            finish(error);
+                        } else if ( list.length ) {
+
+                            // handle every list item by its type
+                            list.forEach(function ( item ) {
+                                var sourceItem = path.join(source, item),
+                                    targetItem = path.join(target, item),
+                                    sourceStat = fs.statSync(sourceItem),
+                                    file       = false;
+
+                                if ( sourceStat.isDirectory() ) {
+                                    // call copy using new sources
+                                    copy(sourceItem, targetItem, done);
+                                } else if ( !fs.existsSync(targetItem) ) {
+                                    // file doesn't exist
+                                    file = true;
+                                } else if ( sourceStat.mtime > fs.statSync(targetItem).mtime ) {
+                                    // file exist
+                                    file = true;
+                                }
+
+                                if ( file ) {
+                                    fs.writeFileSync(targetItem, fs.readFileSync(sourceItem));
+                                    files++;
+                                }
+                            });
+
+                            level--;
+
+                            if ( level === 0 ) {
+                                finish(null, done);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        copy(config.source, config.target, done);
     }
 };
