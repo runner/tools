@@ -60,6 +60,16 @@ tools.mkdir(
 );
 ```
 
+Copy content from some folder to another folder:
+
+```js
+tools.copy({
+    source: 'src/img',
+    target: 'app/img'
+}, log, function ( error ) {
+    console.log(error);
+});
+``` 
 
 ## Contribution ##
 
