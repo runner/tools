@@ -21,12 +21,12 @@ module.exports = {
                     if ( error ) {
                         if ( error.code !== 'ENOENT' ) {
                             log.fail(error.toString());
+                            ready(error);
                         }
                     } else {
                         log.info('remove ' + log.colors.bold(file));
+                        ready(null);
                     }
-
-                    ready();
                 });
             };
         }), done);
@@ -53,7 +53,7 @@ module.exports = {
         async.parallel(files.map(function ( file ) {
             // create task
             return function ( ready ) {
-                fs.writeFile(file.name, file.data, function ( error ) {
+                fs.writeFile(file.name, file.data || '', function ( error ) {
                     if ( error ) {
                         log.fail(error.toString());
                     } else {
@@ -64,7 +64,7 @@ module.exports = {
                         );
                     }
 
-                    ready();
+                    ready(error);
                 });
             };
         }), done);
@@ -95,12 +95,12 @@ module.exports = {
                     if ( error ) {
                         if ( error.code !== 'EEXIST' ) {
                             log.fail(error.toString());
+                            ready(error);
                         }
                     } else {
                         log.info('mkdir ' + log.colors.bold(dir));
+                        ready(null);
                     }
-
-                    ready();
                 });
             };
         }), done);
