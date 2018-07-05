@@ -34,7 +34,7 @@ module.exports = {
 
 
     read: function ( file, log, done ) {
-        fs.readFile(file, function ( error, data ) {
+        fs.readFile(file, 'utf8', function ( error, data ) {
             if ( error ) {
                 log.fail(error.toString());
             } else {
