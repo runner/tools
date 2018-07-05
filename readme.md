@@ -63,13 +63,17 @@ tools.mkdir(
 Copy a directory content to another place:
 
 ```js
-tools.copy({
-    source: 'src/img',
-    target: 'build/develop/img'
-}, log, function ( error ) {
-    console.log(error);
-});
-``` 
+tools.copy(
+    {
+        source: 'src/img',
+        target: 'build/develop/img'
+    },
+    log,
+    function ( error ) {
+        console.log(error);
+    }
+);
+```
 
 ## Contribution ##
 
