@@ -60,7 +60,7 @@ tools.mkdir(
 );
 ```
 
-Copy content from some folder to another folder:
+Copy a directory content to another place:
 
 ```js
 tools.copy({
