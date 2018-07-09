@@ -36,6 +36,18 @@ tools.unlink(
 );
 ```
 
+Read file content in a buffer:
+
+```js
+tools.read(
+    'src/css/main.css',
+    log,
+    function ( error, data ) {
+        console.log(error, data.toString());    
+    }
+);
+```
+
 Write generated files content:
 
 ```js
