@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/runner/tools"
+        "url": "https://github.com/runner/tools.git"
     },
     "publishConfig": {
         "access": "public"
