@@ -1,5 +1,5 @@
 {
-    "name": "@runner/tools",
+    "name": "runner-tools",
     "version": "1.2.0",
     "description": "Simple task runner tools.",
     "author": {

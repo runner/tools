@@ -2,17 +2,17 @@ Task runner tools
 =================
 
 [![build status](https://img.shields.io/travis/runner/tools.svg?style=flat-square)](https://travis-ci.org/runner/tools)
-[![npm version](https://img.shields.io/npm/v/@runner/tools.svg?style=flat-square)](https://www.npmjs.com/package/@runner/tools)
+[![npm version](https://img.shields.io/npm/v/runner-tools.svg?style=flat-square)](https://www.npmjs.com/package/runner-tools)
 [![dependencies status](https://img.shields.io/david/runner/tools.svg?style=flat-square)](https://david-dm.org/runner/tools)
 [![devDependencies status](https://img.shields.io/david/dev/runner/tools.svg?style=flat-square)](https://david-dm.org/runner/tools?type=dev)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/DarkPark/runner)
-[![RunKit](https://img.shields.io/badge/RunKit-try-yellow.svg?style=flat-square)](https://npm.runkit.com/@runner/tools)
+[![RunKit](https://img.shields.io/badge/RunKit-try-yellow.svg?style=flat-square)](https://npm.runkit.com/runner-tools)
 
 
 ## Installation ##
 
 ```bash
-npm install @runner/tools
+npm install runner-tools
 ```
 
 
@@ -21,7 +21,7 @@ npm install @runner/tools
 Add to the scope:
 
 ```js
-var tools = require('@runner/tools');
+var tools = require('runner-tools');
 ```
 
 Remove some generated files:
@@ -95,4 +95,4 @@ according to the contribution [rules](.github/contributing.md).
 
 ## License ##
 
-`@runner/tools` is released under the [GPL-3.0 License](http://opensource.org/licenses/GPL-3.0).
+`runner-tools` is released under the [GPL-3.0 License](http://opensource.org/licenses/GPL-3.0).
