@@ -7,7 +7,7 @@
 
 var fs    = require('fs'),
     path  = require('path'),
-    async = require('@cjssdk/async');
+    async = require('cjs-async');
 
 
 // public
