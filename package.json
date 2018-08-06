@@ -10,9 +10,6 @@
         "type": "git",
         "url": "https://github.com/runner/tools.git"
     },
-    "publishConfig": {
-        "access": "public"
-    },
     "scripts": {
         "lint": "eslint .",
         "test": "npm run lint"
@@ -21,8 +18,7 @@
         "@cjssdk/async": "^1.5.1"
     },
     "devDependencies": {
-        "@cjssdk/eslint-config": "^1.1.2",
-        "eslint": "^4.19.1"
+        "cjs-eslint": "^1.1.1"
     },
     "keywords": [
         "task",
