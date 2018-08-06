@@ -115,7 +115,7 @@ module.exports = {
             directories = 0,
             files       = 0;
 
-        function finish ( error, done ) {
+        function finish ( error, callback ) {
             if ( error ) {
                 log.fail(error.toString());
             } else {
@@ -128,10 +128,10 @@ module.exports = {
                 );
             }
 
-            done(error);
+            callback(error);
         }
 
-        function copy ( source, target, done ) {
+        function copy ( source, target, callback ) {
             level++;
 
             fs.mkdir(target, function ( error ) {
@@ -155,7 +155,7 @@ module.exports = {
 
                                 if ( sourceStat.isDirectory() ) {
                                     // call copy using new sources
-                                    copy(sourceItem, targetItem, done);
+                                    copy(sourceItem, targetItem, callback);
                                 } else if ( !fs.existsSync(targetItem) || sourceStat.mtime > fs.statSync(targetItem).mtime ) {
                                     fs.writeFileSync(targetItem, fs.readFileSync(sourceItem));
                                     files++;
@@ -165,7 +165,7 @@ module.exports = {
                             level--;
 
                             if ( level === 0 ) {
-                                finish(null, done);
+                                finish(null, callback);
                             }
                         }
                     });
