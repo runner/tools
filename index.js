@@ -136,7 +136,7 @@ module.exports = {
 
             fs.mkdir(target, function ( error ) {
                 if ( error && error.code !== 'EEXIST' ) {
-                    finish(error);
+                    finish(error, callback);
                 } else {
                     if ( !error ) {
                         directories++;
@@ -145,7 +145,7 @@ module.exports = {
                     fs.readdir(source, function ( error, list ) {
                         // check exist source
                         if ( error ) {
-                            finish(error);
+                            finish(error, callback);
                         } else if ( list.length ) {
                             // handle every list item by its type
                             list.forEach(function ( item ) {
