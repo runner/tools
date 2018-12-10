@@ -173,6 +173,12 @@ module.exports = {
             });
         }
 
-        copy(config.source, config.target, done);
+        fs.exists(config.source, function ( exists ) {
+            if ( exists ) {
+                copy(config.source, config.target, done);
+            } else {
+                finish(config.source + 'doesn\'t exists');
+            }
+        });
     }
 };
