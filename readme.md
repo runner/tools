@@ -21,7 +21,7 @@ npm install runner-tools
 Add to the scope:
 
 ```js
-var tools = require('runner-tools');
+const tools = require('runner-tools');
 ```
 
 Remove some generated files:

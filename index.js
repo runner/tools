@@ -5,7 +5,8 @@
 
 'use strict';
 
-var fs    = require('fs'),
+const
+    fs    = require('fs'),
     path  = require('path'),
     async = require('cjs-async');
 
@@ -74,7 +75,7 @@ module.exports = {
 
 
     mkdir: function ( targets, log, done ) {
-        var paths = [];
+        const paths = [];
 
         // convert to a list of simple paths for fs.mkdir
         targets.forEach(function ( target ) {
@@ -111,7 +112,7 @@ module.exports = {
 
 
     copy: function ( config, log, done ) {
-        var level       = 0,
+        let level       = 0,
             directories = 0,
             files       = 0;
 
@@ -149,7 +150,8 @@ module.exports = {
                         } else if ( list.length ) {
                             // handle every list item by its type
                             list.forEach(function ( item ) {
-                                var sourceItem = path.join(source, item),
+                                const
+                                    sourceItem = path.join(source, item),
                                     targetItem = path.join(target, item),
                                     sourceStat = fs.statSync(sourceItem);
 
